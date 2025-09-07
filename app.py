@@ -43,10 +43,44 @@ st.title("🎉 Chá de Casa Nova 🎉")
 st.subheader("Dani & Micael")
 st.write("📅 Domingo, 14 de Setembro - 13h")
 
+# =======================
+# Texto de introdução
+# =======================
+st.markdown("""
+💝 **Nossa nova fase começou!**
+
+Estamos muito felizes em compartilhar com vocês a conquista da nossa casa nova.  
+Ter amigos e familiares tão especiais por perto torna esse momento ainda mais marcante, porque vocês fazem parte da nossa história e é uma alegria enorme poder comemorar essa etapa ao lado de quem amamos.
+
+---
+
+### 🎁 Como nos presentear
+Aqui vocês podem escolher a forma que for mais prática e confortável:
+
+- 📲 Contribuir através do **Pix**, no valor que quiserem e puderem.  
+- 🎁 Escolher um dos **itens da lista** abaixo, reservar aquele que gostariam de nos presentear e trazer no dia (ou até mesmo em outro momento, caso comprem online e não chegue a tempo).  
+
+Assim conseguimos evitar presentes repetidos e organizar tudo com mais carinho.
+
+---
+
+🎨 **Sugestão de cores**  
+Para manter uma harmonia em nossa casa, sugerimos dar preferência a itens em **tons neutros** (como branco, bege, cinza, preto fosco e inox).  
+Essas cores combinam facilmente entre si e ajudam a manter um ambiente moderno, clean e acolhedor.  
+
+*(São apenas sugestões — qualquer presente será recebido com muito carinho! ❤️)*
+
+---
+
+✨ O mais importante é **estarmos juntos celebrando** essa nova fase da nossa vida.  
+O presente é uma forma de ajuda e lembrança, mas a presença de vocês é o que realmente faz toda a diferença. ❤️
+""")
+
+# =======================
+# Exibir chave Pix e QR Code
+# =======================
 st.markdown("## 📲 Dados para Pix")
 st.write(f"**Chave Pix:** `{PIX_CHAVE}`")
-
-# Exibe imagem já pronta do QR Code (arquivo na mesma pasta do app)
 st.image("qrcode.png", caption="Escaneie o QR Code para pagar via Pix", width=220)
 
 # =======================
