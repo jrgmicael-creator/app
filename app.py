@@ -102,7 +102,7 @@ st.markdown("### 🎁 Presentes disponíveis")
 st.dataframe(df_filtrado[colunas_existentes], use_container_width=True, height=300)
 
 # =======================
-# Formulário para reserva
+# Formulário para reserva (com verificação de concorrência)
 # =======================
 st.markdown("### ✍️ Reservar um presente")
 if "Status" in df.columns:
@@ -120,14 +120,24 @@ if opcoes:
             if nome.strip() == "":
                 st.warning("Digite seu nome antes de reservar.")
             else:
-                idx = df[df["Item"] == item_escolhido].index[0]
-                if "Status" in df.columns:
-                    df.at[idx, "Status"] = "Reservado"
-                df.at[idx, "Nome da Pessoa"] = nome
-                salvar_dados(df)
-                st.success(f"🎉 {item_escolhido} reservado por {nome}!")
-                st.rerun()  # força atualização imediata (corrigido)
+                # Recarrega dados antes de salvar para evitar sobreposição
+                df_atual = carregar_dados()
 
+                # Verifica se ainda está disponível
+                if "Status" in df_atual.columns:
+                    status_atual = df_atual.loc[df_atual["Item"] == item_escolhido, "Status"].values[0]
+                    if status_atual != "Disponível":
+                        st.error("❌ Esse presente acabou de ser reservado por outra pessoa. Escolha outro!")
+                        st.rerun()
+                    else:
+                        idx = df_atual[df_atual["Item"] == item_escolhido].index[0]
+                        df_atual.at[idx, "Status"] = "Reservado"
+                        df_atual.at[idx, "Nome da Pessoa"] = nome
+                        salvar_dados(df_atual)
+                        st.success(f"🎉 {item_escolhido} reservado por {nome}!")
+                        st.rerun()
+                else:
+                    st.error("Erro: não encontrei coluna de status para controlar reservas.")
 else:
     st.info("Todos os presentes já foram reservados.")
 
