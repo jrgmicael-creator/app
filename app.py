@@ -47,7 +47,7 @@ st.info("💝 Apoie com uma doação via PIX — Chave: **email@exemplo.com**")
 df = carregar_dados()
 
 # Lista de colunas que queremos exibir
-colunas_exibidas = ["Item", "Categoria", "Quantidade", "Cor preferida e observações"]
+colunas_exibidas = ["Item", "Categoria", "Quantidade","Status", "Cor Preferida","Observações"]
 
 # Garantir que só usamos colunas existentes no DataFrame
 colunas_existentes = [c for c in colunas_exibidas if c in df.columns]
@@ -94,9 +94,9 @@ if opcoes:
 else:
     st.info("Todos os presentes já foram reservados.")
 
-# Situação final
-st.markdown("### 📋 Situação atualizada da lista")
-st.dataframe(df[colunas_existentes], use_container_width=True, height=300)
+# # Situação final
+# st.markdown("### 📋 Situação atualizada da lista")
+# st.dataframe(df[colunas_existentes], use_container_width=True, height=300)
 
 # Rodapé
 st.markdown("---")
