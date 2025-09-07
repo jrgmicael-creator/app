@@ -41,15 +41,27 @@ st.title("🎉 Chá de Casa Nova 🎉")
 st.subheader("Dani & Micael")
 st.write("📅 Domingo, 14 de Setembro - 13h")
 
-st.info("💝 Nossa nova fase começou e estamos muito felizes em compartilhar com vocês a conquista da nossa casa nova. Ter amigos e familiares tão especiais por perto torna esse momento ainda mais marcante, porque vocês fazem parte da nossa história e é uma alegria enorme poder comemorar essa etapa ao lado de quem amamos.
+st.markdown("""
+💝 **Nossa nova fase começou!**
 
-Para quem desejar nos presentear, criamos este espaço com muito carinho. Aqui vocês podem escolher a forma que for mais prática e confortável:
+Estamos muito felizes em compartilhar com vocês a conquista da nossa casa nova.  
+Ter amigos e familiares tão especiais por perto torna esse momento ainda mais marcante, porque vocês fazem parte da nossa história e é uma alegria enorme poder comemorar essa etapa ao lado de quem amamos.
 
-- Contribuir através do Pix, no valor que quiserem e puderem.
+---
 
-* Ou, se preferirem, há também a possibilidade de escolher um dos itens da lista que montamos abaixo, reservar aquele que gostariam de nos presentear e trazer no dia ou até mesmo em outro momento, caso comprem online e não chegue a tempo, por exemplo. Assim conseguimos evitar presentes repetidos e organizar tudo com mais carinho.
+### 🎁 Como nos presentear
+Aqui vocês podem escolher a forma que for mais prática e confortável:
 
-O mais importante é estarmos juntos celebrando essa nova fase da nossa vida. O presente é uma forma de ajuda e lembrança, mas a presença de vocês é o que realmente faz toda a diferença.**")
+- 📲 Contribuir através do **Pix**, no valor que quiserem e puderem.  
+- 🎁 Escolher um dos **itens da lista** abaixo, reservar aquele que gostariam de nos presentear e trazer no dia (ou até mesmo em outro momento, caso comprem online e não chegue a tempo).  
+
+Assim conseguimos evitar presentes repetidos e organizar tudo com mais carinho.
+
+---
+
+✨ O mais importante é **estarmos juntos celebrando** essa nova fase da nossa vida.  
+O presente é uma forma de ajuda e lembrança, mas a presença de vocês é o que realmente faz toda a diferença. ❤️
+""")
 
 # Carrega os dados
 df = carregar_dados()
