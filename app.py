@@ -126,7 +126,8 @@ if opcoes:
                 df.at[idx, "Nome da Pessoa"] = nome
                 salvar_dados(df)
                 st.success(f"🎉 {item_escolhido} reservado por {nome}!")
-                st.experimental_rerun()
+                st.rerun()  # força atualização imediata (corrigido)
+
 else:
     st.info("Todos os presentes já foram reservados.")
 
