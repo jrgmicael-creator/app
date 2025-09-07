@@ -17,7 +17,7 @@ creds = Credentials.from_service_account_info(
 )
 client = gspread.authorize(creds)
 
-# ID da planilha (pegue da URL do Google Sheets)
+# ID da planilha (fixo conforme solicitado)
 SHEET_ID = "1UoP4mQHMpBk6XuyQnP4S062qOoq0YJuwIjxnLF-czdU"
 sheet = client.open_by_key(SHEET_ID).sheet1
 
@@ -25,12 +25,10 @@ sheet = client.open_by_key(SHEET_ID).sheet1
 # Funções auxiliares
 # =======================
 def carregar_dados():
-    """Lê dados do Google Sheets e retorna um DataFrame"""
     data = sheet.get_all_records()
     return pd.DataFrame(data)
 
 def salvar_dados(df: pd.DataFrame):
-    """Sobrescreve os dados no Google Sheets"""
     sheet.clear()
     sheet.update([df.columns.values.tolist()] + df.values.tolist())
 
@@ -48,6 +46,12 @@ st.info("💝 Apoie com uma doação via PIX — Chave: **email@exemplo.com**")
 # Carrega os dados
 df = carregar_dados()
 
+# Lista de colunas que queremos exibir
+colunas_exibidas = ["Item", "Categoria", "Quantidade", "Cor preferida e observações"]
+
+# Garantir que só usamos colunas existentes no DataFrame
+colunas_existentes = [c for c in colunas_exibidas if c in df.columns]
+
 # Filtro por categoria
 st.markdown("### 🔎 Escolha uma categoria")
 categorias = ["Todas"] + sorted(df["Categoria"].unique().tolist())
@@ -58,15 +62,17 @@ if categoria_sel != "Todas":
 else:
     df_filtrado = df
 
-# Mostra somente colunas definidas
-colunas_exibidas = ["Item", "Categoria", "Quantidade", "Cor preferida e observações"]
-
+# Mostra tabela
 st.markdown("### 🎁 Presentes disponíveis")
-st.dataframe(df_filtrado[colunas_exibidas], use_container_width=True, height=300)
+st.dataframe(df_filtrado[colunas_existentes], use_container_width=True, height=300)
 
 # Formulário para reserva
 st.markdown("### ✍️ Reservar um presente")
-opcoes = df[df["Status"] == "Disponível"]["Item"].tolist()
+# Agora só exibe itens realmente disponíveis
+if "Status" in df.columns:
+    opcoes = df[df["Status"] == "Disponível"]["Item"].tolist()
+else:
+    opcoes = df["Item"].tolist()  # fallback se não existir Status
 
 if opcoes:
     with st.form("reserva_form"):
@@ -79,16 +85,18 @@ if opcoes:
                 st.warning("Digite seu nome antes de reservar.")
             else:
                 idx = df[df["Item"] == item_escolhido].index[0]
-                df.at[idx, "Status"] = "Reservado"
+                if "Status" in df.columns:
+                    df.at[idx, "Status"] = "Reservado"
                 df.at[idx, "Nome da Pessoa"] = nome
                 salvar_dados(df)
                 st.success(f"🎉 {item_escolhido} reservado por {nome}!")
+                st.experimental_rerun()  # força atualização imediata
 else:
     st.info("Todos os presentes já foram reservados.")
 
-# Situação final (sem coluna Status)
+# Situação final
 st.markdown("### 📋 Situação atualizada da lista")
-st.dataframe(df[colunas_exibidas], use_container_width=True, height=300)
+st.dataframe(df[colunas_existentes], use_container_width=True, height=300)
 
 # Rodapé
 st.markdown("---")
