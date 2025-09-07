@@ -65,8 +65,7 @@ Assim conseguimos evitar presentes repetidos e organizar tudo com mais carinho.
 ---
 
 🎨 **Sugestão de cores**  
-Para manter uma harmonia em nossa casa, sugerimos dar preferência a itens em **tons neutros** (como branco, bege, cinza, preto fosco e inox).  
-Essas cores combinam facilmente entre si e ajudam a manter um ambiente moderno, clean e acolhedor.  
+Para manter uma harmonia em nossa casa, sugerimos dar preferência a itens em **tons neutros** (como branco, vermelho, marrom, preto e inox).  
 
 *(São apenas sugestões — qualquer presente será recebido com muito carinho! ❤️)*
 
