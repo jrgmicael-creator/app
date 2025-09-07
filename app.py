@@ -58,8 +58,11 @@ if categoria_sel != "Todas":
 else:
     df_filtrado = df
 
+# Mostra somente colunas definidas
+colunas_exibidas = ["Item", "Categoria", "Quantidade", "Cor preferida e observações"]
+
 st.markdown("### 🎁 Presentes disponíveis")
-st.dataframe(df_filtrado, use_container_width=True, height=300)
+st.dataframe(df_filtrado[colunas_exibidas], use_container_width=True, height=300)
 
 # Formulário para reserva
 st.markdown("### ✍️ Reservar um presente")
@@ -83,9 +86,9 @@ if opcoes:
 else:
     st.info("Todos os presentes já foram reservados.")
 
-# Situação final
+# Situação final (sem coluna Status)
 st.markdown("### 📋 Situação atualizada da lista")
-st.dataframe(df, use_container_width=True, height=300)
+st.dataframe(df[colunas_exibidas], use_container_width=True, height=300)
 
 # Rodapé
 st.markdown("---")
