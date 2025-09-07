@@ -41,6 +41,32 @@ st.title("🎉 Chá de Casa Nova 🎉")
 st.subheader("Dani & Micael")
 st.write("📅 Domingo, 14 de Setembro - 13h")
 
+import streamlit as st
+import qrcode
+from io import BytesIO
+
+# =======================
+# Configuração Pix
+# =======================
+PIX_CHAVE = "19993733423"  # Substitua pela sua chave PIX real
+
+# Gerar QR Code a partir da chave Pix
+qr = qrcode.QRCode(
+    version=1,
+    error_correction=qrcode.constants.ERROR_CORRECT_H,
+    box_size=8,
+    border=2,
+)
+qr.add_data(PIX_CHAVE)
+qr.make(fit=True)
+
+img = qr.make_image(fill_color="black", back_color="white")
+buffer = BytesIO()
+img.save(buffer, format="PNG")
+
+# =======================
+# Texto com instruções
+# =======================
 st.markdown("""
 💝 **Nossa nova fase começou!**
 
@@ -59,15 +85,31 @@ Assim conseguimos evitar presentes repetidos e organizar tudo com mais carinho.
 
 ---
 
+🎨 **Sugestão de cores**
+Para manter uma harmonia em nossa casa, sugerimos dar preferência a itens em **tons neutros** (como branco, bege, cinza, preto fosco e inox).  
+Essas cores combinam facilmente entre si e ajudam a manter um ambiente moderno, clean e acolhedor.  
+
+*(São apenas sugestões — qualquer presente será recebido com muito carinho! ❤️)*
+
+---
+
 ✨ O mais importante é **estarmos juntos celebrando** essa nova fase da nossa vida.  
 O presente é uma forma de ajuda e lembrança, mas a presença de vocês é o que realmente faz toda a diferença. ❤️
 """)
+
+# =======================
+# Exibir chave Pix e QR Code
+# =======================
+st.subheader("📲 Dados para Pix")
+st.write(f"**Chave Pix (e-mail):** `{PIX_CHAVE}`")
+st.image(buffer.getvalue(), caption="Escaneie o QR Code para pagar via Pix", width=200)
+
 
 # Carrega os dados
 df = carregar_dados()
 
 # Lista de colunas que queremos exibir
-colunas_exibidas = ["Item", "Categoria", "Quantidade","Status", "Cor Preferida","Observações"]
+colunas_exibidas = ["Item", "Categoria", "Quantidade","Status"]
 
 # Garantir que só usamos colunas existentes no DataFrame
 colunas_existentes = [c for c in colunas_exibidas if c in df.columns]
